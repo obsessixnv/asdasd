@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plant Detail Information</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #27ae60;
+            --background-color: #ecf0f1;
+            --text-color: #2c3e50;
+            --table-hover: #f8f9fa;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body-1 {
+            font-family: 'Roboto', sans-serif;
+            background-color: white;
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .detail-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        p strong {
+            color: var(--primary-color);
+            display: inline-block;
+            width: 200px;
+            margin-right: 15px;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #2ecc71;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .detail-container {
+                padding: 15px;
+                margin: 0 10px;
+            }
+
+            p strong {
+                display: block;
+                margin-bottom: 5px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="body-1">
+    <div class="detail-container">
+        <h2>{{ detail.plant.common_name |default:"Not Defined" }} ({{ detail.plant.scientific_name  |default:"Not Defined"}})</h2>
+        <p><strong>Microorganism:</strong> {{ detail.micro.name |default:"Not Defined"}}</p>
+        <p><strong>Plant Part:</strong> {{ detail.plant.part |default:"Not Defined"}}</p>
+        <p><strong>Origin:</strong> {{ detail.plant.origin |default:"Not Defined"}}</p>
+        <p><strong>Repetitions:</strong> {{ detail.repetitions |default:"Not Defined"}}</p>
+        <p><strong>Concentration:</strong> {{ detail.concentration |default:"Not Defined"}} {{ detail.concentration_units |default:""}}</p>
+        <p><strong>Concentration SD:</strong> {{ detail.concentration_sd |default:"Not Defined"}}</p>
+        <p><strong>Concentration SE:</strong> {{ detail.concentration_se |default:"Not Defined"}}</p>
+        <p><strong>Original Value:</strong> {{ detail.original_value |default:"Not Defined"}} {{ detail.units |default:""}}</p>
+        <p><strong>Standard Deviation (SD):</strong> {{ detail.sd |default:"Not Defined"}}</p>
+        <p><strong>Standard Error (SE):</strong> {{ detail.se |default:"Not Defined"}}</p>
+        <p><strong>Interpretation Value:</strong> {{ detail.interpretation_value }}</p>
+        <p><strong>Experiment Type:</strong> {{ detail.experiment_type |default:"Not Defined"}}</p>
+        <p><strong>Method:</strong> {{ detail.method_name |default:"Not Defined"}} ({{ detail.method_type |default:""}})</p>
+        <p><strong>Method Description:</strong> {{ detail.description |default:"Not Defined"}}</p>
+
+        {% if detail.publication %}
+            <h3>Publication Details</h3>
+            <p><strong>Title:</strong> {{ detail.publication.title |default:"Not Defined"}}</p>
+            <p><strong>Authors:</strong> {{ detail.publication.authors |default:"Not Defined"}}</p>
+            <p><strong>Year:</strong> {{ detail.publication.publication_year |default:"Not Defined"}}</p>
+            <p><strong>URL:</strong> <a href="{{ detail.publication.url }}" target="_blank">{{ detail.publication.url }}</a></p>
+        {% endif %}
+
+        {% if detail.add_info %}
+            <h3>Additional Information</h3>
+            <p>{{ detail.add_info |default:"Not Defined"}}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

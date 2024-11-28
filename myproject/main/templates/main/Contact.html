@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+              :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #27ae60;
+            --background-color: #ecf0f1;
+            --text-color: #2c3e50;
+            --table-hover: #f8f9fa;
+        }
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .contact-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        .email-link {
+            color: #27ae60;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .email-link:hover {
+            text-decoration: underline;
+        }
+       nav {
+            background-color: var(--primary-color);
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        /* Load More Button Styling */
+        .load-more-btn {
+            background-color: var(--accent-color);   /* Matches the site's accent color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Soft shadow for depth */
+        }
+
+        .load-more-btn:hover {
+            background-color: #2ecc71;   /* Slightly lighter green on hover */
+            transform: translateY(-3px);  /* Lift effect */
+        }
+
+        .load-more-btn:active {
+            transform: translateY(1px);  /* Press-down effect */
+        }
+
+        nav div {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div>
+            <a href="#">PBAA db</a>
+            <a href="{% url 'main_page' %}">Home</a>
+            <a href="{% url 'plant_page' %}">Plants</a>
+            <a href="{% url 'compounds_page' %}">Compounds</a>
+            <a href="{% url 'extracts_page' %}">Microorganisms</a>
+            <a href="{% url 'contact_page' %}">Contact Us</a>
+        </div>
+    </nav>
+    <div class="contact-container">
+        <h1>Contact Us</h1>
+        <p>Supervisor of the project:</p>
+        <p><strong>DSc, Prof. Nadiya Boyko</strong></p>
+        <p>Email: <a href="mailto:nadiya.boyko@uzhnu.edu.ua" class="email-link">nadiya.boyko@uzhnu.edu.ua</a></p>
+    </div>
+</body>
+</html>

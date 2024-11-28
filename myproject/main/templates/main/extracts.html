@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extracts Data</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #27ae60;
+            --background-color: #ecf0f1;
+            --text-color: #2c3e50;
+            --table-hover: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        nav {
+            background-color: var(--primary-color);
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        nav div {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .load-more-btn {
+            background-color: var(--accent-color);   /* Matches the site's accent color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Soft shadow for depth */
+        }
+
+        .load-more-btn:hover {
+            background-color: #2ecc71;   /* Slightly lighter green on hover */
+            transform: translateY(-3px);  /* Lift effect */
+        }
+
+        .load-more-btn:active {
+            transform: translateY(1px);  /* Press-down effect */
+        }
+        nav a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .filter-section input {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 200px;
+        }
+
+        .filter-section button {
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .filter-section button:hover {
+            background-color: #2ecc71;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        tbody tr:hover {
+            background-color: var(--table-hover);
+        }
+
+        .view-button {
+            color: var(--accent-color);
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+
+        .view-button:hover {
+            color: #2ecc71;
+            text-decoration: underline;
+        }
+                /* Positive interpretation value */
+            .positive {
+                color: green;
+                font-weight: bold;
+            }
+
+            /* Negative interpretation value */
+            .negative {
+                color: red;
+                font-weight: bold;
+            }
+        @media (max-width: 768px) {
+            nav div {
+                flex-direction: column;
+                align-items: center;
+            }
+            .filter-section {
+                flex-direction: column;
+                align-items: center;
+            }
+            .filter-section input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            table {
+                font-size: 0.9rem;
+            }
+            th, td {
+                padding: 10px;
+            }
+
+
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div>
+            <a href="#">PBAA db</a>
+            <a href="{% url 'main_page' %}">Home</a>
+            <a href="{% url 'plant_page' %}">Plants</a>
+            <a href="{% url 'compounds_page' %}">Compounds</a>
+            <a href="{% url 'extracts_page' %}">Microorganisms</a>
+            <a href="{% url 'contact_page' %}">Contact Us</a>
+        </div>
+    </nav>
+<div class="container">
+    <h1>Extracts Data Table</h1>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <form method="GET" action="">
+            <input type="text" name="extract_name" placeholder="Extract Name" value="{{ extract_name }}">
+            <input type="text" name="micro_name" placeholder="Microorganism Name" value="{{ micro_name }}">
+            <button type="submit">Filter Data</button>
+        </form>
+    </div>
+
+    <!-- Data Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Extract Name</th>
+                <th>Microorganism Name</th>
+                <th>Number of Experiments</th>
+                <th>Number of Impacts</th>
+                <th>Average Impact</th>
+            </tr>
+        </thead>
+        <tbody  id="data-body">
+            {% for item in data %}
+                <tr>
+                    <td>{{ item.extract__name | default:"Not Defined" }}</td>
+                    <td>{{ item.micro__name | default:"Not Defined" }}</td>
+                    <td>{{ item.num_of_experiments | default:"Not Defined" }}</td>
+                    <td class="{% if item.num_of_impacts > 0 %}positive{% elif item.num_of_impacts < 0 %}negative{% endif %}">
+                        {{ item.num_of_impacts }}
+                    </td>
+                    <td class="{% if item.avg_impact > 0 %}positive{% elif item.avg_impact < 0 %}negative{% endif %}">
+                        {{ item.avg_impact }}
+                    </td>                     </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination Controls -->
+<div class="load-more-container" style="text-align:center; margin-top:20px;">
+    {% if data.has_next %}
+        <button id="load-more" class="load-more-btn" data-next-page="{{ data.next_page_number }}">Load More</button>
+    {% endif %}
+</div>
+
+<script>
+document.getElementById('load-more').addEventListener('click', function() {
+    const nextPage = this.getAttribute('data-next-page');
+    const params = new URLSearchParams(window.location.search);
+    params.set('page', nextPage);
+
+    fetch(`?${params.toString()}`)
+        .then(response => response.text())
+        .then(html => {
+            // Create a temporary element to extract the new rows
+            const tempElement = document.createElement('div');
+            tempElement.innerHTML = html;
+            const newRows = tempElement.querySelectorAll('#data-body tr');
+
+            // Append the new rows to the table
+            newRows.forEach(row => document.getElementById('data-body').appendChild(row));
+
+            // Update or remove the Load More button
+            const newLoadMore = tempElement.querySelector('#load-more');
+            if (newLoadMore) {
+                this.setAttribute('data-next-page', newLoadMore.getAttribute('data-next-page'));
+            } else {
+                this.remove();
+            }
+        })
+        .catch(error => console.error('Error loading more data:', error));
+});
+</script>
+</body>
+</html>
