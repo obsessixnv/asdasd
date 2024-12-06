@@ -88,7 +88,7 @@ Follow these steps to set up the project locally:
    ```  
 
 7. Visit the app at:  
-[https://microbiotadb-a6d80522104e.herokuapp.com/compounds/](https://microbiotadb-a6d80522104e.herokuapp.com/compounds/)
+[https://microbiotadb-a6d80522104e.herokuapp.com](https://microbiotadb-a6d80522104e.herokuapp.com)
 
 ---
 
